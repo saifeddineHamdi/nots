@@ -66,8 +66,22 @@ class _NotesPageState extends State<NotesPage> {
                 ),
                 DropdownButton(
                   value: dropdownValue,
+                  borderRadius: BorderRadius.circular(16),
                   items: dropdownOptions
-                      .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Row(
+                            children: [
+                              Text(e),
+                              if (e == dropdownValue) ...[
+                                SizedBox(width: 8),
+                                Icon(Icons.check),
+                              ],
+                            ],
+                          ),
+                        ),
+                      )
                       .toList(),
                   onChanged: (newValue) {
                     setState(() {
@@ -87,20 +101,70 @@ class _NotesPageState extends State<NotesPage> {
                 itemCount: 15,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 4,
-                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 6,
+                  mainAxisSpacing: 6,
                 ),
                 itemBuilder: (context, int index) {
                   return Container(
+                    decoration: BoxDecoration(
+                      color: white,
+                      border: Border.all(color: primary),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primary.withValues(alpha: 0.5),
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
+                    padding: EdgeInsets.all(10),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('this title'),
-                        Row(children: [Container(child: Text('First chip'))]),
-                        Text('Content'),
+                        Text(
+                          'this title',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 4),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                              3,
+                              (index) => Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: gray100,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 4,
+                                ),
+                                margin: EdgeInsets.only(right: 8),
+                                child: Text('First chip'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 4),
+
+                        Expanded(child: Text('Content')),
                         Row(
                           children: [
-                            Text('07 march 2026'),
-                            FaIcon(FontAwesomeIcons.trash),
+                            Text(
+                              '07 march 2026',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: gray500,
+                              ),
+                            ),
+                            Spacer(),
+                            FaIcon(
+                              FontAwesomeIcons.trash,
+                              color: gray500,
+                              size: 16,
+                            ),
                           ],
                         ),
                       ],

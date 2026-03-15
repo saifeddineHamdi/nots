@@ -34,9 +34,21 @@ class _NotesPageState extends State<NotesPage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.large(
-        onPressed: () {},
-        child: FaIcon(FontAwesomeIcons.plus),
+      floatingActionButton: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [BoxShadow(color: black, offset: Offset(4, 4))],
+        ),
+        child: FloatingActionButton.large(
+          onPressed: () {},
+          child: FaIcon(FontAwesomeIcons.plus),
+          backgroundColor: primary,
+          foregroundColor: white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: black),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
